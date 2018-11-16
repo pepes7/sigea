@@ -10,6 +10,8 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -18,9 +20,9 @@ import javax.swing.JPanel;
 public class Util {
 
     public final static Color GRAY_LIGHT = new Color(157, 156, 156);
-    public final static Color PURPLE = new Color(168,102,237);
-    public final static Font FONT_FIELDS =  new Font("Arial Narrow", Font.ITALIC, 20); //fonte para os jtextField
-    public final static Font FONT_DEFAULT =  new Font("Arial Narrow", Font.PLAIN, 25); //fonte padrão de escrita
+    public final static Color PURPLE = new Color(168, 102, 237);
+    public final static Font FONT_FIELDS = new Font("Arial Narrow", Font.ITALIC, 20); //fonte para os jtextField
+    public final static Font FONT_DEFAULT = new Font("Arial Narrow", Font.PLAIN, 25); //fonte padrão de escrita
     public static JPanel TELA_ATUAL;
     public static JPanel ULTIMA_TELA;
     public final static ImageIcon background = new ImageIcon("res//back.png");
@@ -30,6 +32,16 @@ public class Util {
     public final static int JTXT_TAMANHO_ALT = 35; //tamanho da Altura dos JTextFields da Classe Cadastro
     public final static int JTXT_X = 328;    // X  dos JTextFields da Classe Cadastro
     public final static ImageIcon backgroundEntrada = new ImageIcon("res//Entrada.png");
-    
+    public final static ImageIcon backgroundLoginFuncionario = new ImageIcon("res//LoginFuncionario.png");
 
+    public static void JButtonInit(JButton button, int x, int y, int tamLarg, int tamAlt, boolean area, boolean borda, JPanel panel) {
+        button = new JButton();
+        button.setContentAreaFilled(area);
+        button.setBorderPainted(borda);
+        button.setBounds(x, y, tamLarg, tamAlt);
+        panel.add(button);
+    }
+
+
+  
 }

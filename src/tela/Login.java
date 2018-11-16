@@ -60,7 +60,8 @@ public class Login extends JPanel{
         add(jCadastro);
         add(user);
         add(password);
-        user.requestFocus();   
+        user.requestFocus();
+   
     }
     
     @Override
@@ -68,7 +69,8 @@ public class Login extends JPanel{
         super.paintComponent(g);
         g.drawImage(img, 0, 0,this.getWidth(),this.getHeight(),this);
         //g.setColor(Util.PURPLE);
-        //g.fillRect(0,0,getWidth(),getHeight());   
+        //g.fillRect(0,0,getWidth(),getHeight());
+        
     }
     
 }
