@@ -14,8 +14,8 @@ import javax.swing.JTextField;
 public class Login extends JPanel{
     protected ImageIcon cadastro,cadastroSublinhado,olhoCorte;
     protected Image img;
-    protected JTextField user;
-    protected JPasswordField password;
+    protected JTextField jtxtEmail;
+    protected JPasswordField jtxtPassword;
     protected Util util;
     protected JButton jCadastro, jOlho;
     
@@ -26,24 +26,24 @@ public class Login extends JPanel{
         cadastro = new ImageIcon("res//Cadastre-se.png");
         cadastroSublinhado = new ImageIcon("res//Cadastre-se_Sublinhado.png");
         img = util.background.getImage();
-        user = new JTextField();
-        password = new JPasswordField();
+        jtxtEmail = new JTextField();
+        jtxtPassword = new JPasswordField();
         setLayout(null);
         
-        user.setBounds(417,304,363,31); 
-        user.setBorder(null);
-        password.setBorder(null);
-        password.setBounds(417,363,363,31);
-        user.setForeground(util.GRAY_LIGHT);
-        user.setFont( new Font("Arial Narrow", Font.ITALIC, 20));
-        password.setForeground(util.GRAY_LIGHT);
-        password.setFont( new Font("Arial Narrow", Font.ITALIC, 20));
+        jtxtEmail.setBounds(417,304,363,31); 
+        jtxtEmail.setBorder(null);
+        jtxtPassword.setBorder(null);
+        jtxtPassword.setBounds(417,363,363,31);
+        jtxtEmail.setForeground(util.GRAY_LIGHT);
+        jtxtEmail.setFont(util.FONT_FIELDS);
+        jtxtPassword.setForeground(util.GRAY_LIGHT);
+        jtxtPassword.setFont(util.FONT_FIELDS);
       
         
-        user.setText("Email Pessoal");
+        jtxtEmail.setText("Email Pessoal");
       
-        password.setEchoChar('\u0000');
-        password.setText("Senha");
+        jtxtPassword.setEchoChar('\u0000');
+        jtxtPassword.setText("Senha");
         
         jCadastro = new JButton();       //botao para criar uma conta
         jCadastro.setContentAreaFilled(false);
@@ -58,9 +58,10 @@ public class Login extends JPanel{
         
         add(jOlho);
         add(jCadastro);
-        add(user);
-        add(password);
-        user.requestFocus();
+        add(jtxtEmail);
+        add(jtxtPassword);
+        jtxtEmail.requestFocus(true);
+        
    
     }
     

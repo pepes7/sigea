@@ -21,7 +21,7 @@ public class Util {
 
     public final static Color GRAY_LIGHT = new Color(157, 156, 156);
     public final static Color PURPLE = new Color(168, 102, 237);
-    public final static Font FONT_FIELDS = new Font("Arial Narrow", Font.ITALIC, 20); //fonte para os jtextField
+    public final static Font FONT_FIELDS = new Font("Arial Narrow", Font.ITALIC, 25); //fonte para os jtextField
     public final static Font FONT_DEFAULT = new Font("Arial Narrow", Font.PLAIN, 25); //fonte padrão de escrita
     public static JPanel TELA_ATUAL;
     public static JPanel ULTIMA_TELA;
@@ -42,6 +42,38 @@ public class Util {
         panel.add(button);
     }
 
+    public static void JTextDelete(JTextField txt, String st) { //metodo para rescrever o texto padrao no JTextField caso esteja vazio o campo
+        if (txt.getText().isEmpty()) {
+            txt.setFont(FONT_FIELDS);
+            txt.setForeground(GRAY_LIGHT);
+            txt.setText(st);
+        }
+    }
 
-  
+    public static void JTextDelete(JPasswordField txt, String st) { //metodo para rescrever o texto padrao no JPasswordField caso esteja vazio o campo
+        if (txt.getText().isEmpty()){
+            txt.setEchoChar('\u0000');
+            txt.setFont(FONT_FIELDS);
+            txt.setForeground(GRAY_LIGHT);
+            txt.setText(st);
+        }
+    }
+
+    public static void JTextInit(int tecla, JTextField txt, String st) { //metodo para apagar o texto no JTextField para o usuario digitar
+        if (tecla != 0 && txt.getText().equals(st) && txt.isFocusOwner()){
+            txt.setText("");
+            txt.setFont(FONT_DEFAULT);
+            txt.setForeground(Color.BLACK);
+        }
+    }
+
+    public static void JTextInit(int tecla, JPasswordField txt, String st) { //metodo para apagar o texto no JPasswordField para o usuario digitar
+        if (tecla != 0 && txt.getText().equals(st) && txt.isFocusOwner()) {
+            txt.setText("");
+            txt.setEchoChar('\u2022');
+            txt.setFont(FONT_DEFAULT);
+            txt.setForeground(Color.BLACK);
+        }
+    }
+
 }

@@ -42,8 +42,6 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
         login.addKeyListener(this);
 
         login.setFocusable(true);
-        login.user.addKeyListener(this);
-        login.password.addKeyListener(this);
 
         setTitle("SIGEA");
         setSize(login.img.getWidth(this), login.img.getHeight(this));
@@ -51,18 +49,26 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
-        add(login);
+        add(entrada);
 
         this.login.jCadastro.addActionListener(this);
         this.login.jCadastro.addMouseListener(this);
         this.login.jOlho.addMouseListener(this);
-        this.login.user.addMouseListener(this);
-        this.login.password.addMouseListener(this);
+        this.login.jtxtEmail.addMouseListener(this);
+        this.login.jtxtPassword.addMouseListener(this);
 
         this.cadastro.jCadastrar.addActionListener(this);
         this.entrada.jParticipante.addActionListener(this);
         this.entrada.jFuncionario.addActionListener(this);
 
+        login.jtxtEmail.addKeyListener(this);
+        login.jtxtPassword.addKeyListener(this);
+        
+        cadastro.jtxtCpf.addKeyListener(this);
+        cadastro.jtxtNome.addKeyListener(this);
+        cadastro.jtxtEmail.addKeyListener(this);
+        cadastro.jtxtEndereco.addKeyListener(this);
+        cadastro.jtxtSenha.addKeyListener(this);
     }
 
     public static void main(String[] args) {
@@ -117,33 +123,46 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
     @Override
     public void keyPressed(KeyEvent e) {
         int tecla = e.getKeyCode();
-        
+
         if (tecla == KeyEvent.VK_ESCAPE) {
             trocarTela(util.TELA_ATUAL, util.ULTIMA_TELA);
         }
-    
-        JTextInit(tecla,login.user,"Email Pessoal");
-        JTextInit(tecla,login.password,"Senha");
+
+        util.JTextInit(tecla, login.jtxtEmail, "Email Pessoal");
+        util.JTextInit(tecla, login.jtxtPassword, "Senha");
+        
+        util.JTextInit(tecla, cadastro.jtxtCpf, "Cpf");
+        util.JTextInit(tecla, cadastro.jtxtNome, "Nome");
+        util.JTextInit(tecla, cadastro.jtxtEmail, "Email");
+        util.JTextInit(tecla, cadastro.jtxtSenha, "Senha");
+        util.JTextInit(tecla, cadastro.jtxtEndereco, "Endereco");
+        
     }
 
     @Override
-    public void keyReleased(KeyEvent e){
-        JTextDelete(login.user,"Email Pessoal");
-        JTextDelete(login.password,"Senha");
+    public void keyReleased(KeyEvent e) {
+        util.JTextDelete(login.jtxtEmail, "Email Pessoal");
+        util.JTextDelete(login.jtxtPassword, "Senha");
+        
+        util.JTextDelete(cadastro.jtxtCpf, "Cpf");
+        util.JTextDelete(cadastro.jtxtNome, "Nome");
+        util.JTextDelete(cadastro.jtxtEmail, "Email");
+        util.JTextDelete(cadastro.jtxtSenha, "Senha");
+        util.JTextDelete(cadastro.jtxtEndereco, "Endereco");
 
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        if (e.getSource() == login.user) {
-            login.user.setCaretPosition(0);
+        if (e.getSource() == login.jtxtEmail) {
+            login.jtxtEmail.setCaretPosition(0);
             clickUser = true;
             clickPassword = false;
         }
 
-        if (e.getSource() == login.password) {
-            login.password.setCaretPosition(0);
+        if (e.getSource() == login.jtxtPassword) {
+            login.jtxtPassword.setCaretPosition(0);
             clickPassword = true;
             clickUser = false;
 
@@ -154,10 +173,10 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
     @Override
     public void mousePressed(MouseEvent e) { //se pressionar
         if (e.getSource() == login.jOlho) { //botao bressionado pelo mouse
-            if (bot == false && !login.password.getText().equals(" Senha")) {
-                login.password.requestFocus();
+            if (bot == false && !login.jtxtPassword.getText().equals(" Senha")) {
+                login.jtxtPassword.requestFocus();
                 login.jOlho.setIcon(null);
-                login.password.setEchoChar('\u0000'); //revelar
+                login.jtxtPassword.setEchoChar('\u0000'); //revelar
             }
             bot = !bot;
         }
@@ -167,10 +186,10 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
     @Override
     public void mouseReleased(MouseEvent e) {
         if (e.getSource() == login.jOlho) {
-            if (bot && !login.password.getText().equals(" Senha")) {
+            if (bot && !login.jtxtPassword.getText().equals(" Senha")) {
                 login.jOlho.setIcon(login.olhoCorte);
-                login.password.requestFocus();
-                login.password.setEchoChar('\u2022'); //ocultar
+                login.jtxtPassword.requestFocus();
+                login.jtxtPassword.setEchoChar('\u2022'); //ocultar
             }
             bot = !bot;
         }
@@ -191,42 +210,5 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
         }
 
     }
-    
-    public static void updateText(){
-        
-    
-    }
-    
-    public static void JTextDelete(JTextField txt, String st) { //metodo para rescrever o texto padrao no JTextField caso esteja vazio o campo
-        if (txt.getText().isEmpty()) {
-            txt.setFont(FONT_FIELDS);
-            txt.setForeground(GRAY_LIGHT);
-            txt.setText(st);
-        }
-    }
-    public static void JTextDelete(JPasswordField txt, String st) { //metodo para rescrever o texto padrao no JPasswordField caso esteja vazio o campo
-        if (txt.getText().isEmpty()) {
-            txt.setFont(FONT_FIELDS);
-            txt.setForeground(GRAY_LIGHT);
-            txt.setText(st);
-        }
-    }
-
-    public static void JTextInit(int tecla, JTextField txt, String st) { //metodo para apagar o texto no JTextField para o usuario digitar
-        if (tecla != 0 && txt.getText().equals(st)) {
-            txt.setText("");
-            txt.setFont(FONT_DEFAULT);
-            txt.setForeground(Color.BLACK);
-        }
-    }
-    
-    public static void JTextInit(int tecla, JPasswordField txt, String st) { //metodo para apagar o texto no JPasswordField para o usuario digitar
-        if (tecla != 0 && txt.getText().equals(st)) {
-            txt.setText("");
-            txt.setFont(FONT_DEFAULT);
-            txt.setForeground(Color.BLACK);
-        }
-    }
-
 
 }
