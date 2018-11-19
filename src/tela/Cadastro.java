@@ -17,51 +17,31 @@ public class Cadastro extends JPanel {
     protected Util util;
     protected JTextField jtxtCpf, jtxtNome, jtxtEmail, jtxtEndereco;
     protected JPasswordField jtxtSenha;
-    protected JButton jCadastrar;
+    protected JButton jCadastrar,jOlho;
 
     public Cadastro() {
-        img = util.background_cadastro.getImage();
+        img = util.backgroundCadastro.getImage();
         setLayout(null);
         
-        jCadastrar = new JButton();
-        jCadastrar.setContentAreaFilled(false);
-        jCadastrar.setBorderPainted(false);
-        jCadastrar.setBounds(510,630,180,45);
-
         jtxtCpf = new JTextField();
         jtxtNome = new JTextField();
         jtxtEmail = new JTextField();
         jtxtEndereco = new JTextField();
         jtxtSenha = new JPasswordField();
         
-        //Definindo as confihurações dos JtextFields 
-        jtxtCpf.setBounds(util.JTXT_X,282,util.JTX_TAMANHO_LARG,util.JTXT_TAMANHO_ALT);      
-        jtxtNome.setBounds(util.JTXT_X,349,util.JTX_TAMANHO_LARG,util.JTXT_TAMANHO_ALT);   
-        jtxtEmail.setBounds(util.JTXT_X,416,util.JTX_TAMANHO_LARG,util.JTXT_TAMANHO_ALT);
-        jtxtSenha.setBounds(util.JTXT_X,483,util.JTX_TAMANHO_LARG,util.JTXT_TAMANHO_ALT);
-        jtxtEndereco.setBounds(util.JTXT_X,550,util.JTX_TAMANHO_LARG,util.JTXT_TAMANHO_ALT);
+         //Definindo as confihurações dos JtextFields 
+        util.jTextInit(jtxtCpf, util.JTXT_X, 282, util.JTX_TAMANHO_LARG, util.JTXT_TAMANHO_ALT,"Cpf",this);
+        util.jTextInit(jtxtNome, util.JTXT_X, 349, util.JTX_TAMANHO_LARG, util.JTXT_TAMANHO_ALT,"Nome",this);
+        util.jTextInit(jtxtEmail, util.JTXT_X, 416, util.JTX_TAMANHO_LARG, util.JTXT_TAMANHO_ALT,"Email",this);
+        util.jTextInit(jtxtSenha, util.JTXT_X, 483, util.JTX_TAMANHO_LARG, util.JTXT_TAMANHO_ALT,"Senha",this);
+        util.jTextInit(jtxtEndereco, util.JTXT_X, 550, util.JTX_TAMANHO_LARG, util.JTXT_TAMANHO_ALT,"Endereço",this);   
         
-        //Tirando as Bordas dos JTextFields
-        jtxtCpf.setBorder(null);
-        jtxtNome.setBorder(null);
-        jtxtEmail.setBorder(null);
-        jtxtSenha.setBorder(null);
-        jtxtEndereco.setBorder(null);
+        //Botao para Cadastrar pessoa             
+        jCadastrar = new JButton(); 
+        jOlho = new JButton(); 
         
-        //Define o tamanho e fonte dos textos
-        jtxtCpf.setFont(util.FONT_DEFAULT);
-        jtxtNome.setFont(util.FONT_DEFAULT);
-        jtxtEmail.setFont(util.FONT_DEFAULT);
-        jtxtSenha.setFont(util.FONT_DEFAULT);
-        jtxtEndereco.setFont(util.FONT_DEFAULT);
-        
-        //Adicionando no JPanel
-        add(jtxtCpf);
-        add(jtxtNome);
-        add(jtxtEmail);
-        add(jtxtSenha);
-        add(jtxtEndereco);
-        add(jCadastrar);
+        util.jButtonInit(jCadastrar, 510, 630, 180, 45, false, false, this, null);
+        util.jButtonInit(jOlho, 880, 493, 30, 15, false, false, this, util.olhoCorte);
     }
 
     @Override
@@ -69,5 +49,4 @@ public class Cadastro extends JPanel {
         super.paintComponent(g);
         g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
     }
-
 }

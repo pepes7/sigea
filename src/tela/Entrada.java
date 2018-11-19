@@ -15,18 +15,13 @@ public class Entrada extends JPanel {
         setLayout(null);
         img = util.backgroundEntrada.getImage();
 
+        //Botão para entrar como Participante
         jParticipante = new JButton();
-        jParticipante.setContentAreaFilled(false);
-        jParticipante.setBorderPainted(false);
-        jParticipante.setBounds(82, 340, 465,55);
-        
+        util.jButtonInit(jParticipante, 82, 340, 465, 55, false, false, this, null);
+
+        //Botão para entrar como Funcionario
         jFuncionario = new JButton();
-        jFuncionario.setContentAreaFilled(false);
-        jFuncionario.setBorderPainted(false);
-        jFuncionario.setBounds(690, 340, 465,55);
-        
-        add(jParticipante);
-        add(jFuncionario);
+        util.jButtonInit(jFuncionario, 690, 340, 465, 55, false, false, this, null);
     }
 
     @Override

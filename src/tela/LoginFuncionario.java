@@ -13,7 +13,7 @@ public class LoginFuncionario extends JPanel {
     protected Util util;
     protected JTextField jtxtEmail;
     protected JPasswordField jtxtSenha;
-    JButton jEntrar;
+    protected JButton jEntrar;
 
     public LoginFuncionario() {
         setLayout(null);
@@ -22,21 +22,13 @@ public class LoginFuncionario extends JPanel {
         jtxtEmail = new JTextField();
         jtxtSenha = new JPasswordField();
 
-        jtxtEmail.setBounds(util.JTXT_X, 345, util.JTX_TAMANHO_LARG, util.JTXT_TAMANHO_ALT);
-        jtxtSenha.setBounds(util.JTXT_X, 412, util.JTX_TAMANHO_LARG, util.JTXT_TAMANHO_ALT);
-
-        jtxtEmail.setBorder(null);
-        jtxtSenha.setBorder(null);
-
-        jtxtEmail.setFont(util.FONT_DEFAULT);
-        jtxtSenha.setFont(util.FONT_DEFAULT);
+        //Definindo as configurações dos JtextFields
+        util.jTextInit(jtxtEmail,util.JTXT_X, 345, util.JTX_TAMANHO_LARG, util.JTXT_TAMANHO_ALT,"Email Pessoal", this);
+        util.jTextInit(jtxtSenha,util.JTXT_X, 412, util.JTX_TAMANHO_LARG, util.JTXT_TAMANHO_ALT,"Senha", this);
         
-        util.JButtonInit(jEntrar,485,510,200,45,false,false,this);
-        
-        
-
-        add(jtxtEmail);
-        add(jtxtSenha);
+        //Botao para Entrar no Sistema como Funcionario
+        jEntrar = new JButton();
+        util.jButtonInit(jEntrar,485,510,200,45,false,false,this,null);
     }
 
     @Override
