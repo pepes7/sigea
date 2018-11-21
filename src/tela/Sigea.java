@@ -18,6 +18,9 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
     Cadastro cadastro;
     Entrada entrada;
     LoginFuncionario loginFuncionario;
+    Modelo modelo;
+    ModeloFuncionario modeloFuncionario;
+
     Util util;
     Pessoa pessoa;
     PessoaDAO pessoaDao;
@@ -29,6 +32,8 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
         cadastro = new Cadastro();
         entrada = new Entrada();
         loginFuncionario = new LoginFuncionario();
+        modelo = new Modelo();
+        modeloFuncionario = new ModeloFuncionario();
 
         //Configurações do JFrame 
         setTitle("SIGEA");
@@ -43,10 +48,12 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
         cadastro.addKeyListener(this);
         entrada.addKeyListener(this);
         loginFuncionario.addKeyListener(this);
+        modelo.addKeyListener(this);
 
         //metodo para o Iplementar o ActionListener
         this.login.jCadastro.addActionListener(this);
-        this.login.jtxtEmail.addActionListener(this);
+        this.login.jtxtCpf.addActionListener(this);
+        this.login.jEntrar.addActionListener(this);
 
         this.cadastro.jCadastrar.addActionListener(this);
 
@@ -55,16 +62,20 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
         this.entrada.jParticipante.addActionListener(this);
         this.entrada.jFuncionario.addActionListener(this);
 
+        this.modelo.jSair.addActionListener(this);
+
+        this.modeloFuncionario.jSair.addActionListener(this);
+
         //metodo para o Iplementar o Eventos do Mouse nos componentes
         this.login.jCadastro.addMouseListener(this);
         this.login.jOlho.addMouseListener(this);
-        this.login.jtxtEmail.addMouseListener(this);
+        this.login.jtxtCpf.addMouseListener(this);
         this.login.jtxtPassword.addMouseListener(this);
-        
+
         this.cadastro.jOlho.addMouseListener(this);
 
         //metodo para o Teclado ser utilizado no componente
-        this.login.jtxtEmail.addKeyListener(this);
+        this.login.jtxtCpf.addKeyListener(this);
         this.login.jtxtPassword.addKeyListener(this);
 
         this.loginFuncionario.jtxtEmail.addKeyListener(this);
@@ -76,7 +87,7 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
         this.cadastro.jtxtSenha.addKeyListener(this);
         this.cadastro.jtxtEndereco.addKeyListener(this);
 
-        add(cadastro);
+        add(login);
     }
 
     public static void main(String[] args) {
@@ -85,22 +96,39 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
 
     public void trocarTela(JPanel remove, JPanel novaTela) {
 
-        Util.TELA_ATUAL = novaTela;
-        Util.ULTIMA_TELA = remove;
+        util.TELA_ATUAL = novaTela;
+        util.ULTIMA_TELA = remove;
 
-        remove.setVisible(false);
-        this.add(novaTela);
-        novaTela.setVisible(true);
-        novaTela.requestFocus();
-
+        if (util.TELA_ATUAL  != modeloFuncionario && util.TELA_ATUAL  != modelo){
+            remove.setVisible(false);
+            this.add(novaTela);
+            novaTela.setVisible(true);
+            novaTela.requestFocus();
+        }
+       if(util.TELA_ATUAL == login){
+            remove.setVisible(false);
+            this.add(entrada);
+            entrada.setVisible(true);
+            entrada.requestFocus();
+       
+       } 
+       
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //Login
         if (e.getSource() == login.jCadastro) {
             trocarTela(login, cadastro);
         }
 
+        if (e.getSource() == login.jEntrar) {
+            if (pessoaDao.pesquisarPessoa(login.jtxtCpf, login.jtxtPassword)) {
+                trocarTela(login, modelo);
+            }
+        }
+
+        //Entrada
         if (e.getSource() == entrada.jParticipante) {
             trocarTela(entrada, login);
         }
@@ -109,6 +137,7 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
             trocarTela(entrada, loginFuncionario);
         }
 
+        //Cadastro
         if (e.getSource() == cadastro.jCadastrar) {
             pessoa = new Pessoa();
             pessoa.setCpf(cadastro.jtxtCpf.getText());
@@ -118,6 +147,16 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
             pessoa.setEndereco(cadastro.jtxtEndereco.getText());
             pessoaDao = new PessoaDAO();
             pessoaDao.incluir(pessoa);
+        }
+
+        //Modelo
+        if (e.getSource() == modelo.jSair) {
+            trocarTela(modelo, entrada);
+        }
+
+        //ModeloFuncionario
+        if (e.getSource() == modeloFuncionario.jSair) {
+            trocarTela(modeloFuncionario, entrada);
         }
 
     }
@@ -136,7 +175,7 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
         }
 
         //Configuração dos Jtxt da classe Login
-        util.jTextDelete(tecla, login.jtxtEmail, "Email Pessoal");
+        util.jTextDelete(tecla, login.jtxtCpf, "Cpf");
         util.jTextDelete(tecla, login.jtxtPassword, "Senha");
 
         //Configuração dos Jtxt da classe Cadastro
@@ -145,7 +184,7 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
         util.jTextDelete(tecla, cadastro.jtxtEmail, "Email");
         util.jTextDelete(tecla, cadastro.jtxtSenha, "Senha");
         util.jTextDelete(tecla, cadastro.jtxtEndereco, "Endereço");
-        
+
         //Configuração dos Jtxt da classe Cadastro
         util.jTextDelete(tecla, loginFuncionario.jtxtEmail, "Email Pessoal");
         util.jTextDelete(tecla, loginFuncionario.jtxtSenha, "Senha");
@@ -155,7 +194,7 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
     @Override
     public void keyReleased(KeyEvent e) {
         //Configuração dos Jtxt da classe Login
-        util.jTextRewrite(login.jtxtEmail, "Email Pessoal");
+        util.jTextRewrite(login.jtxtCpf, "Cpf");
         util.jTextRewrite(login.jtxtPassword, "Senha");
 
         //Configuração dos Jtxt da classe Cadastro
@@ -171,16 +210,14 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
     }
 
     @Override
-    public void mouseClicked(MouseEvent e){
-         if (e.getSource() == login.jtxtEmail && login.jtxtEmail.getText().equals("Email Pessoal")) {
-            login.jtxtEmail.setCaretPosition(0);
+    public void mouseClicked(MouseEvent e) {
+        if (e.getSource() == login.jtxtCpf && login.jtxtCpf.getText().equals("Email Pessoal")) {
+            login.jtxtCpf.setCaretPosition(0);
         }
 
-        if (e.getSource() == login.jtxtPassword && login.jtxtEmail.getText().equals("Senha")) {
+        if (e.getSource() == login.jtxtPassword && login.jtxtCpf.getText().equals("Senha")) {
             login.jtxtPassword.setCaretPosition(0);
         }
-        
-        
 
     }
 
@@ -215,7 +252,7 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
             }
             bot = !bot;
         }
-        
+
         if (e.getSource() == cadastro.jOlho) {
             if (bot && !cadastro.jtxtSenha.getText().equals("Senha")) {
                 cadastro.jOlho.setIcon(util.olhoCorte);
@@ -243,3 +280,4 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
     }
 
 }
+

@@ -9,34 +9,36 @@ import javax.swing.JTextField;
 
 public class Login extends JPanel {
     protected Image img;
-    protected JTextField jtxtEmail;
+    protected JTextField jtxtCpf;
     protected JPasswordField jtxtPassword;
     protected Util util;
-    protected JButton jCadastro, jOlho;
+    protected JButton jCadastro, jOlho, jEntrar;
 
     public Login() {
         setLayout(null);
         img = util.backgroundLogin.getImage();
 
-        jtxtEmail = new JTextField();
+        jtxtCpf = new JTextField();
         jtxtPassword = new JPasswordField();
         
          //Definindo as configurações dos JtextFields 
-        util.jTextInit(jtxtEmail, 417,304,363, 31,"Email Pessoal", this);
+        util.jTextInit(jtxtCpf, 417,304,363, 31,"Cpf", this);
         util.jTextInit(jtxtPassword, 417,363,363, 31,"Senha", this);
 
         jCadastro = new JButton();//botao para criar uma conta
         jOlho = new JButton();  //botao do olho para revelar senha
+        jEntrar = new JButton();
         
         //Definindo as configurações para os Botões 
         util.jButtonInit(jCadastro, 662, 635, 160, 23, false, false, this, null);
         util.jButtonInit(jOlho, 790, 370, 30, 15, false, false, this, util.olhoCorte);
+        util.jButtonInit(jEntrar, 550, 470, 110, 50, false, false, this, null);
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+        g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), null);
     }
 
 }

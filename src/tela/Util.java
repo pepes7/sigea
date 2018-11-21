@@ -22,17 +22,23 @@ public class Util {
     public final static Color GRAY_LIGHT = new Color(157, 156, 156);
     public final static Font FONT_FIELDS = new Font("Arial Narrow", Font.ITALIC, 25); //fonte para os jtextField
     public final static Font FONT_DEFAULT = new Font("Arial Narrow", Font.PLAIN, 25); //fonte padrão de escrita
+
     public static JPanel TELA_ATUAL;
     public static JPanel ULTIMA_TELA;
+
     public final static ImageIcon backgroundLogin = new ImageIcon("res//back.png");
-    public final static ImageIcon cadastroSublinhado = new ImageIcon("res//sublinhado.png");
+    public final static ImageIcon backgroundEntrada = new ImageIcon("res//Entrada.png");
+    public final static ImageIcon backgroundLoginFuncionario = new ImageIcon("res//LoginFuncionario.png");
     public final static ImageIcon backgroundCadastro = new ImageIcon("res//back_Cadastro.png");
+    public final static ImageIcon backgroundModelo = new ImageIcon("res//Modelo.png");
+    public final static ImageIcon backgroundModeloFuncionario = new ImageIcon("res//ModeloFuncionario.png");
+    
+    public final static ImageIcon cadastroSublinhado = new ImageIcon("res//sublinhado.png");
     public final static ImageIcon olhoCorte = new ImageIcon("res//olhoCorte.png");
+    
     public final static int JTX_TAMANHO_LARG = 543; //tamanho da Largura dos JTextFields da Classe Cadastro
     public final static int JTXT_TAMANHO_ALT = 35; //tamanho da Altura dos JTextFields da Classe Cadastro
     public final static int JTXT_X = 328;    // X  dos JTextFields da Classe Cadastro
-    public final static ImageIcon backgroundEntrada = new ImageIcon("res//Entrada.png");
-    public final static ImageIcon backgroundLoginFuncionario = new ImageIcon("res//LoginFuncionario.png");
 
     //metodo para Configurar um botao
     public static void jButtonInit(JButton button, int x, int y, int tamLarg, int tamAlt, boolean area, boolean borda, JPanel panel, ImageIcon icon) {
@@ -43,18 +49,18 @@ public class Util {
         panel.add(button);
     }
 
-
-    public static void jTextInit(JTextField txt, int x, int y, int tamLarg, int tamAlt,String st,JPanel panel){
-        txt.setBounds(x, y, tamLarg,tamAlt);
+    public static void jTextInit(JTextField txt, int x, int y, int tamLarg, int tamAlt, String st, JPanel panel) {
+        txt.setBounds(x, y, tamLarg, tamAlt);
         txt.setBorder(null);
         txt.setFont(FONT_FIELDS);
         txt.setForeground(GRAY_LIGHT);
         txt.setText(st);
         panel.add(txt);
-    
+
     }
-    public static void jTextInit(JPasswordField txt, int x, int y, int tamLarg, int tamAlt,String st,JPanel panel){
-        txt.setBounds(x, y, tamLarg,tamAlt);
+
+    public static void jTextInit(JPasswordField txt, int x, int y, int tamLarg, int tamAlt, String st, JPanel panel) {
+        txt.setBounds(x, y, tamLarg, tamAlt);
         txt.setBorder(null);
         txt.setFont(FONT_FIELDS);
         txt.setForeground(GRAY_LIGHT);
@@ -62,7 +68,6 @@ public class Util {
         txt.setText(st);
         panel.add(txt);
     }
-    
 
     //metodo para rescrever o texto padrao no JTextField caso esteja vazio o campo
     public static void jTextRewrite(JTextField txt, String st) {

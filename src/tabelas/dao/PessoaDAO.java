@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import tabelas.Pessoa;
@@ -86,7 +87,7 @@ public class PessoaDAO {
         }
     }
 
-    public static void pesquisar(String cpf, JTextField jTxtCpf, JTextField jTxtNome,JTextField jTxtEmail, JTextField jTxtSenha, JTextField jTxtEndereco) {
+    public static void pesquisar(String cpf, JTextField jTxtCpf, JTextField jTxtNome, JTextField jTxtEmail, JTextField jTxtSenha, JTextField jTxtEndereco) {
         String sql = "SELECT * FROM Pessoa WHERE cpf = " + cpf;
         try (PreparedStatement pst = getConnection().prepareStatement(sql)) {
             ResultSet rs = pst.executeQuery(sql);
@@ -105,15 +106,32 @@ public class PessoaDAO {
         }
     }
 
-    public List<Pessoa> getLista(){
-        List<Pessoa> pessoas =new ArrayList<>();
+    public static boolean pesquisarPessoa(JTextField jtxtCpf, JPasswordField jtxtSenha) {
+        String sql = "SELECT cpf,senha FROM Pessoa WHERE cpf = " + jtxtCpf.getText();
+        try (PreparedStatement pst = getConnection().prepareStatement(sql)) {
+            ResultSet rs = pst.executeQuery(sql);
+            while (rs.next()) {
+                if (jtxtCpf.getText().equals(rs.getString(1)) && jtxtSenha.getText().equals(rs.getString(2))) {
+                    pst.close();
+                    disconnection();
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e);
+        }
+         return false;
+    }
+
+    public List<Pessoa> getLista() {
+        List<Pessoa> pessoas = new ArrayList<>();
         String sql = "select * from pessoa";
-        
+
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ResultSet rs= ps.executeQuery();
-            while(rs.next()){
-                Pessoa pessoa=new Pessoa();
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Pessoa pessoa = new Pessoa();
                 // atribui os valores recuperados do banco 
                 // para classe Contato
                 pessoa.setCpf(rs.getString("cpf"));
@@ -125,7 +143,7 @@ public class PessoaDAO {
                 pessoas.add(pessoa);
             }
             ps.close();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return pessoas;

@@ -27,7 +27,7 @@ public class Entrada extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+        g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), null);
     }
 
 }
