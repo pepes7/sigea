@@ -87,7 +87,7 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
         this.cadastro.jtxtSenha.addKeyListener(this);
         this.cadastro.jtxtEndereco.addKeyListener(this);
 
-        add(login);
+        add(modelo);
     }
 
     public static void main(String[] args) {
@@ -105,13 +105,7 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
             novaTela.setVisible(true);
             novaTela.requestFocus();
         }
-       if(util.TELA_ATUAL == login){
-            remove.setVisible(false);
-            this.add(entrada);
-            entrada.setVisible(true);
-            entrada.requestFocus();
        
-       } 
        
     }
 
