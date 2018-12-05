@@ -8,16 +8,16 @@ public class Evento {
     private String nome;
     private int qtdePessoas;
     //Ajeitar os tipos abaixo
-    private int dataInicio;
-    private int dataFim;
-    private int horaInicio;
-    private int horaFim;
-    private int horaInscricaoInicio;
-    private int horaInscricaoFim;
-    private int dataInscricaoInicio;
-    private int dataInscricaoFim;
+    private String dataInicio;
+    private String dataFim;
+    private String horaInicio;
+    private String horaFim;
+    private String horaInscricaoInicio;
+    private String horaInscricaoFim;
+    private String dataInscricaoInicio;
+    private String dataInscricaoFim;
 
-    public Evento(int numero, int matFuncSolicita, int matFuncAutoriza, String nome, int qtdePessoas, int dataInicio, int dataFim, int horaInicio, int horaFim, int horaInscricaoInicio, int horaInscricaoFim, int dataInscricaoInicio, int dataInscricaoFim){
+    public Evento(int numero, int matFuncSolicita, int matFuncAutoriza, String nome, int qtdePessoas, String dataInicio, String dataFim, String horaInicio, String horaFim, String horaInscricaoInicio, String horaInscricaoFim, String dataInscricaoInicio, String dataInscricaoFim) {
         this.numero = numero;
         this.matFuncSolicita = matFuncSolicita;
         this.matFuncAutoriza = matFuncAutoriza;
@@ -32,21 +32,21 @@ public class Evento {
         this.dataInscricaoInicio = dataInscricaoInicio;
         this.dataInscricaoFim = dataInscricaoFim;
     }
-    
-    public Evento(){
+
+    public Evento() {
         this.numero = 0;
         this.matFuncSolicita = 0;
         this.matFuncAutoriza = 0;
         this.nome = "";
         this.qtdePessoas = 0;
-        this.dataInicio = 0;
-        this.dataFim = 0;
-        this.horaInicio = 0;
-        this.horaFim = 0;
-        this.horaInscricaoInicio = 0;
-        this.horaInscricaoFim = 0;
-        this.dataInscricaoInicio = 0;
-        this.dataInscricaoFim = 0;
+        this.dataInicio = "";
+        this.dataFim = "";
+        this.horaInicio = "";
+        this.horaFim = "";
+        this.horaInscricaoInicio = "";
+        this.horaInscricaoFim = "";
+        this.dataInscricaoInicio = "";
+        this.dataInscricaoFim = "";
     }
 
     public int getNumero() {
@@ -89,69 +89,68 @@ public class Evento {
         this.qtdePessoas = qtdePessoas;
     }
 
-    public int getDataInicio() {
+    public String getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(int dataInicio) {
+    public void setDataInicio(String dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public int getDataFim() {
+    public String getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(int dataFim) {
+    public void setDataFim(String dataFim) {
         this.dataFim = dataFim;
     }
 
-    public int getHoraInicio() {
+    public String getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(int horaInicio) {
+    public void setHoraInicio(String horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public int getHoraFim() {
+    public String getHoraFim() {
         return horaFim;
     }
 
-    public void setHoraFim(int horaFim) {
+    public void setHoraFim(String horaFim) {
         this.horaFim = horaFim;
     }
 
-    public int getHoraInscricaoInicio() {
+    public String getHoraInscricaoInicio() {
         return horaInscricaoInicio;
     }
 
-    public void setHoraInscricaoInicio(int horaInscricaoInicio) {
+    public void setHoraInscricaoInicio(String horaInscricaoInicio) {
         this.horaInscricaoInicio = horaInscricaoInicio;
     }
 
-    public int getHoraInscricaoFim() {
+    public String getHoraInscricaoFim() {
         return horaInscricaoFim;
     }
 
-    public void setHoraInscricaoFim(int horaInscricaoFim) {
+    public void setHoraInscricaoFim(String horaInscricaoFim) {
         this.horaInscricaoFim = horaInscricaoFim;
     }
 
-    public int getDataInscricaoInicio() {
+    public String getDataInscricaoInicio() {
         return dataInscricaoInicio;
     }
 
-    public void setDataInscricaoInicio(int dataInscricaoInicio) {
+    public void setDataInscricaoInicio(String dataInscricaoInicio) {
         this.dataInscricaoInicio = dataInscricaoInicio;
     }
 
-    public int getDataInscricaoFim() {
+    public String getDataInscricaoFim() {
         return dataInscricaoFim;
     }
 
-    public void setDataInscricaoFim(int dataInscricaoFim) {
+    public void setDataInscricaoFim(String dataInscricaoFim) {
         this.dataInscricaoFim = dataInscricaoFim;
     }
-    
 
 }

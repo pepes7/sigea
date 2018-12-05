@@ -20,8 +20,10 @@ import javax.swing.JTextField;
 public class Util {
 
     public final static Color GRAY_LIGHT = new Color(157, 156, 156);
-    public final static Font FONT_FIELDS = new Font("Arial Narrow", Font.ITALIC, 25); //fonte para os jtextField
+    public final static Font FONT_FIELDS = new Font("Arial Narrow", Font.PLAIN, 25); //fonte para os jtextField
     public final static Font FONT_DEFAULT = new Font("Arial Narrow", Font.PLAIN, 25); //fonte padrão de escrita
+    
+    public static int  matricula;
 
     public static JPanel TELA_ATUAL;
     public static JPanel ULTIMA_TELA;
@@ -40,14 +42,18 @@ public class Util {
     public final static int JTXT_TAMANHO_ALT = 35; //tamanho da Altura dos JTextFields da Classe Cadastro
     public final static int JTXT_X = 328;    // X  dos JTextFields da Classe Cadastro
 
-    //metodo para Configurar um botao
-    public static void jButtonInit(JButton button, int x, int y, int tamLarg, int tamAlt, boolean area, boolean borda, JPanel panel, ImageIcon icon) {
+    //metodo para Configurar um botao 
+     public static JButton jButtonInit(int x, int y, int tamLarg, int tamAlt, JPanel panel, ImageIcon icon) {
+        JButton button = new JButton();
         button.setIcon(icon);
-        button.setContentAreaFilled(area);
-        button.setBorderPainted(borda);
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
         button.setBounds(x, y, tamLarg, tamAlt);
         panel.add(button);
+        
+        return button;
     }
+
 
     public static void jTextInit(JTextField txt, int x, int y, int tamLarg, int tamAlt, String st, JPanel panel) {
         txt.setBounds(x, y, tamLarg, tamAlt);

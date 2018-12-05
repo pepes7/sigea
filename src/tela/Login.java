@@ -22,17 +22,12 @@ public class Login extends JPanel {
         jtxtPassword = new JPasswordField();
         
          //Definindo as configurações dos JtextFields 
-        util.jTextInit(jtxtCpf, 417,304,363, 31,"Cpf", this);
+        util.jTextInit(jtxtCpf, 417,304,363, 31,"CPF", this);
         util.jTextInit(jtxtPassword, 417,363,363, 31,"Senha", this);
 
-        jCadastro = new JButton();//botao para criar uma conta
-        jOlho = new JButton();  //botao do olho para revelar senha
-        jEntrar = new JButton();
-        
-        //Definindo as configurações para os Botões 
-        util.jButtonInit(jCadastro, 662, 635, 160, 23, false, false, this, null);
-        util.jButtonInit(jOlho, 790, 370, 30, 15, false, false, this, util.olhoCorte);
-        util.jButtonInit(jEntrar, 550, 470, 110, 50, false, false, this, null);
+        jCadastro = util.jButtonInit(662, 635, 160, 23,this, null);//botao para criar uma conta
+        jOlho = util.jButtonInit(790, 370, 30, 15, this, util.olhoCorte);//botao do olho para revelar senha
+        jEntrar = util.jButtonInit(550, 470, 110, 50,this, null);       
     }
 
     @Override

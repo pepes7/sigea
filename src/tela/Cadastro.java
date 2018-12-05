@@ -37,11 +37,8 @@ public class Cadastro extends JPanel {
         util.jTextInit(jtxtEndereco, util.JTXT_X, 550, util.JTX_TAMANHO_LARG, util.JTXT_TAMANHO_ALT,"Endereço",this);   
         
         //Botao para Cadastrar pessoa             
-        jCadastrar = new JButton(); 
-        jOlho = new JButton(); 
-        
-        util.jButtonInit(jCadastrar, 510, 630, 180, 45, false, false, this, null);
-        util.jButtonInit(jOlho, 880, 493, 30, 15, false, false, this, util.olhoCorte);
+        jCadastrar = util.jButtonInit(510, 630, 180, 45, this, null);
+        jOlho = util.jButtonInit(880, 493, 30, 15, this, util.olhoCorte); 
     }
 
     @Override

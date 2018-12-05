@@ -1,7 +1,6 @@
 package tabelas.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,46 +11,22 @@ import javax.swing.JTextField;
 
 import tabelas.Pessoa;
 
-public class PessoaDAO {
+public class PessoaDao extends Dao{
 
     private static Connection connection = null;
     private static Pessoa pessoa;
-
-    public PessoaDAO() {
+    
+    public PessoaDao() {
         pessoa = new Pessoa();
     }
 
-    public static Connection getConnection() {
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3308/sigea", "root", "");
-            connection.createStatement();
-        } catch (SQLException e) {
-            System.out.println("Erro: " + e);
-        }
-        return connection;
-    }
-
-    public static void disconnection() {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            System.out.println("Erro: " + e);
-        }
-    }
-
-    public static Pessoa getPessoa() {
-        return pessoa;
-    }
-
     public static void incluir(Pessoa pessoa) {
-        String sql = "INSERT INTO Pessoa VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO Pessoa VALUES(?,?,?,?)";
         try (PreparedStatement pst = getConnection().prepareStatement(sql)) {
             pst.setString(1, pessoa.getCpf());
             pst.setString(2, pessoa.getNome());
             pst.setString(3, pessoa.getEmail());
-            pst.setString(4, pessoa.getSenha());
-            pst.setString(5, pessoa.getEndereco());
-
+            pst.setString(4, pessoa.getEndereco());
             pst.executeUpdate();
             pst.close();
             disconnection();
@@ -72,13 +47,12 @@ public class PessoaDAO {
     }
 
     public static void alterar(Pessoa pessoa) {
-        String sql = "UPDATE Pessoa SET nome = ?, email = ?, senha = ?,endereco = ? WHERE cpf = ?";
+        String sql = "UPDATE Pessoa SET nome = ?, email = ?,endereco = ? WHERE cpf = ?";
         try (PreparedStatement pst = getConnection().prepareStatement(sql)) {
             pst.setString(1, pessoa.getNome());
             pst.setString(2, pessoa.getEmail());
-            pst.setString(3, pessoa.getSenha());
-            pst.setString(4, pessoa.getEndereco());
-            pst.setString(5, pessoa.getCpf());
+            pst.setString(3, pessoa.getEndereco());
+            pst.setString(4, pessoa.getCpf());
             pst.executeUpdate();
             pst.close();
             disconnection();
@@ -87,7 +61,7 @@ public class PessoaDAO {
         }
     }
 
-    public static void pesquisar(String cpf, JTextField jTxtCpf, JTextField jTxtNome, JTextField jTxtEmail, JTextField jTxtSenha, JTextField jTxtEndereco) {
+    public static void pesquisar(String cpf, JTextField jTxtCpf, JTextField jTxtNome, JTextField jTxtEmail, JTextField jTxtEndereco) {
         String sql = "SELECT * FROM Pessoa WHERE cpf = " + cpf;
         try (PreparedStatement pst = getConnection().prepareStatement(sql)) {
             ResultSet rs = pst.executeQuery(sql);
@@ -95,8 +69,7 @@ public class PessoaDAO {
                 jTxtCpf.setText(rs.getString(1));
                 jTxtNome.setText(rs.getString(2));
                 jTxtEmail.setText(rs.getString(3));
-                jTxtSenha.setText(rs.getString(4));
-                jTxtEndereco.setText(rs.getString(5));
+                jTxtEndereco.setText(rs.getString(4));
             }
 
             pst.close();
@@ -106,8 +79,8 @@ public class PessoaDAO {
         }
     }
 
-    public static boolean pesquisarPessoa(JTextField jtxtCpf, JPasswordField jtxtSenha) {
-        String sql = "SELECT cpf,senha FROM Pessoa WHERE cpf = " + jtxtCpf.getText();
+    public static boolean loginCandidato(JTextField jtxtCpf, JPasswordField jtxtSenha) {
+        String sql = "select cpf,senha from pessoa join candidato on cpfPessoa = cpf and cpf = " + jtxtCpf.getText();
         try (PreparedStatement pst = getConnection().prepareStatement(sql)) {
             ResultSet rs = pst.executeQuery(sql);
             while (rs.next()) {
@@ -120,13 +93,30 @@ public class PessoaDAO {
         } catch (SQLException e) {
             System.out.println("Erro: " + e);
         }
-         return false;
+        return false;
+    }
+
+    public static boolean loginFuncionario(JTextField jtxtMatricula, JPasswordField jtxtSenha){
+        String sql = "select matricula,senha from Funcionario where matricula = " + jtxtMatricula.getText();
+        try (PreparedStatement pst = getConnection().prepareStatement(sql)) {
+            ResultSet rs = pst.executeQuery(sql);
+            while (rs.next()){
+ 
+                if (jtxtMatricula.getText().equals(rs.getString(1)) && jtxtSenha.getText().equals(rs.getString(2))) {
+                    pst.close();
+                    disconnection();
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e);
+        }
+        return false;
     }
 
     public List<Pessoa> getLista() {
         List<Pessoa> pessoas = new ArrayList<>();
         String sql = "select * from pessoa";
-
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -137,7 +127,6 @@ public class PessoaDAO {
                 pessoa.setCpf(rs.getString("cpf"));
                 pessoa.setNome(rs.getString("nome"));
                 pessoa.setEmail(rs.getString("email"));
-                pessoa.setSenha(rs.getString("senha"));
                 pessoa.setEndereco(rs.getString("endereco"));
                 // adiciona o contato no ArrayList
                 pessoas.add(pessoa);
@@ -147,5 +136,41 @@ public class PessoaDAO {
             throw new RuntimeException(e);
         }
         return pessoas;
+    }
+
+    public static String nomeFuncionario(JTextField jtxtMatricula) {
+        String st = "";
+        String sql = " select nome from pessoa join Funcionario on cpfPessoa = cpf and matricula = " + jtxtMatricula.getText();
+        try (PreparedStatement pst = getConnection().prepareStatement(sql)) {
+            ResultSet rs = pst.executeQuery(sql);
+            while (rs.next()) {
+                st = rs.getString(1);
+                pst.close();
+                disconnection();
+                return st;
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e);
+        }
+        return st;
+    }
+    
+    public static String nomeCandidato(JTextField jtxtCpf) {
+        String st = "";
+        String sql = " select nome from pessoa where  cpf = " + jtxtCpf.getText();
+        try (PreparedStatement pst = getConnection().prepareStatement(sql)) {
+            ResultSet rs = pst.executeQuery(sql);
+            while (rs.next()) {
+                st = rs.getString(1);
+                pst.close();
+                disconnection();
+                return st;
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e);
+        }
+        return st;
     }
 }

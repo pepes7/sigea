@@ -4,21 +4,18 @@ public class Pessoa {
     private String cpf;
     private String nome;
     private String email;
-    private String senha;
     private String endereco;
     
     public Pessoa(){
         cpf = "";
         nome = "";
         email = "";        
-        senha = "";
         endereco = "";        
     }
-    public Pessoa(String cpf, String nome,String email,String senha,String endereco){
+    public Pessoa(String cpf, String nome,String email,String endereco){
         this.cpf = cpf;
         this.nome = nome;
         this.email = email;        
-        this.senha = senha;
         this.endereco = endereco;        
     }
 
@@ -44,14 +41,6 @@ public class Pessoa {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public String getEndereco() {

@@ -16,12 +16,11 @@ public class Entrada extends JPanel {
         img = util.backgroundEntrada.getImage();
 
         //Botão para entrar como Participante
-        jParticipante = new JButton();
-        util.jButtonInit(jParticipante, 82, 340, 465, 55, false, false, this, null);
-
+        jParticipante = util.jButtonInit(82, 340, 465, 55, this, null);
+        
         //Botão para entrar como Funcionario
-        jFuncionario = new JButton();
-        util.jButtonInit(jFuncionario, 690, 340, 465, 55, false, false, this, null);
+        jFuncionario = util.jButtonInit(690, 340, 465, 55,this, null);
+        
     }
 
     @Override
