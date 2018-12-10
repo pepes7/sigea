@@ -1,3 +1,4 @@
+
 package tela;
 
 import java.awt.Color;
@@ -8,19 +9,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class ModeloFuncionario extends JPanel {
-
+/**
+ *
+ * @author Gabriel
+ */
+public class FuncionarioAlteraDados extends JPanel{
     protected Image img;
     protected Util util;
-    protected JButton jSair,jAlterar, jConsultar,jExcluir,jSalvar;
+    protected JButton jSair,jAdicionar, jConsultar,jExcluir,jAlterar;
     protected JTextField jtxtNumero, jtxtNome, jtxtVagas;
     protected JTextField jtxtDataInicio, jtxtDataFim,jtxtHoraInicio, jtxtHoraFim;
     protected JTextField jtxtInscricaoDataInicio, jtxtInscricaoDataFim,jtxtInscricaoHoraInicio, jtxtInscricaoHoraFim;
     protected JLabel jlUsuario;
 
-    public ModeloFuncionario() {
+    public FuncionarioAlteraDados() {
         setLayout(null);
-        img = util.backgroundModeloFuncionario.getImage();
+        img = util.backgroundFuncionarioAlteraDados.getImage();
         
         jlUsuario = new JLabel("Bem Vindo "+Util.nomeFuncionario);
         jlUsuario.setBounds(200, 15, 200, 22);
@@ -29,13 +33,14 @@ public class ModeloFuncionario extends JPanel {
         
         
         jSair = util.jButtonInit(1140, 13, 40, 30,this, null);
-        jAlterar = util.jButtonInit(30, 300, 180, 100,this, null);
+        jAdicionar = util.jButtonInit(30, 130, 200, 100, this, null);
         jConsultar = util.jButtonInit(30, 470, 200, 100,this, null);
         jExcluir = util.jButtonInit(30, 620, 180, 100,this, null);
-        jSalvar = new JButton("Salvar");
+        jAlterar = new JButton("Alterar");
 
         
         jtxtNumero = new JTextField();
+        jtxtNumero.setEditable(false);
         jtxtNome = new JTextField();
         jtxtVagas = new JTextField();
         jtxtDataInicio = new JTextField();
@@ -62,8 +67,8 @@ public class ModeloFuncionario extends JPanel {
         util.jTextInit(jtxtInscricaoHoraFim, 1039, 634, 125, 30, "23:59", this);
         
                
-        jSalvar.setBounds(1035,715,150,45);
-        add(jSalvar);
+        jAlterar.setBounds(1035,715,150,45);
+        add(jAlterar);
         add(jlUsuario);
     }
 
@@ -72,5 +77,5 @@ public class ModeloFuncionario extends JPanel {
         super.paintComponent(g);
         g.drawImage(img, 0, 0, img.getWidth(this), img.getHeight(this), null);
     }
-
+    
 }

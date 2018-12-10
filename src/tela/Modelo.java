@@ -17,7 +17,7 @@ public class Modelo extends JPanel{
         setLayout(null);
         img = util.backgroundModelo.getImage();
         
-        jlUsuario = new JLabel();
+        jlUsuario = new JLabel("Bem Vindo " +Util.nomeCandidato);
         jlUsuario.setBounds(246, 29, 200, 22);
         jlUsuario.setFont(util.FONT_DEFAULT);
         jlUsuario.setForeground(Color.WHITE);

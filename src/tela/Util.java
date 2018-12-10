@@ -24,6 +24,8 @@ public class Util {
     public final static Font FONT_DEFAULT = new Font("Arial Narrow", Font.PLAIN, 25); //fonte padrão de escrita
     
     public static int  matricula = 0;
+    public static String nomeFuncionario = "";
+    public static String nomeCandidato = "";
 
     public static JPanel TELA_ATUAL;
     public static JPanel ULTIMA_TELA;
@@ -34,6 +36,8 @@ public class Util {
     public final static ImageIcon backgroundCadastro = new ImageIcon("res//back_Cadastro.png");
     public final static ImageIcon backgroundModelo = new ImageIcon("res//Modelo.png");
     public final static ImageIcon backgroundModeloFuncionario = new ImageIcon("res//ModeloFuncionario.png");
+    public final static ImageIcon backgroundFuncionarioAlterar = new ImageIcon("res//ModeloFuncionarioAlterar.png");
+    public final static ImageIcon backgroundFuncionarioAlteraDados = new ImageIcon("res//FuncionarioAlteraDados.png");
     
     public final static ImageIcon cadastroSublinhado = new ImageIcon("res//sublinhado.png");
     public final static ImageIcon olhoCorte = new ImageIcon("res//olhoCorte.png");
