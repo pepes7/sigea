@@ -23,7 +23,7 @@ public class Util {
     public final static Font FONT_FIELDS = new Font("Arial Narrow", Font.PLAIN, 25); //fonte para os jtextField
     public final static Font FONT_DEFAULT = new Font("Arial Narrow", Font.PLAIN, 25); //fonte padrão de escrita
     
-    public static int  matricula;
+    public static int  matricula = 0;
 
     public static JPanel TELA_ATUAL;
     public static JPanel ULTIMA_TELA;

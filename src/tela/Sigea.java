@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import tabelas.Candidato;
 import tabelas.Evento;
 
@@ -44,8 +45,9 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
         loginFuncionario = new LoginFuncionario();
         modelo = new Modelo();
         modeloFuncionario = new ModeloFuncionario();
-        
+
         eventoDao = new EventoDao();
+       
 
         //Configurações do JFrame 
         setTitle("SIGEA");
@@ -54,10 +56,10 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
-        
+
         init();
 
-        add(cadastro);
+        add(login);
     }
 
     public static void main(String[] args) {
@@ -73,42 +75,42 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
         this.add(novaTela);
         novaTela.setVisible(true);
         novaTela.requestFocus();
-        
+
         init();
-        
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         //Login
-        if (e.getSource() == login.jCadastro){
-            trocarTela(login, cadastro = new Cadastro() );
+        if (e.getSource() == login.jCadastro) {
+            trocarTela(login, cadastro = new Cadastro());
 
         }
 
-        if (e.getSource() == login.jEntrar){
-            if (pessoaDao.loginCandidato(login.jtxtCpf, login.jtxtPassword)){
-                   modelo.jlUsuario.setText(pessoaDao.nomeCandidato(login.jtxtCpf));
-                trocarTela(login, modelo = new Modelo() );
+        if (e.getSource() == login.jEntrar) {
+            if (pessoaDao.loginCandidato(login.jtxtCpf, login.jtxtPassword)) {
+                trocarTela(login, modelo = new Modelo());
+                 modelo.jlUsuario.setText("Bem Vindo " +pessoaDao.nomeCandidato(login.jtxtCpf));
             }
         }
 
         //Login Funcionario
         if (e.getSource() == loginFuncionario.jEntrar) {
-            if (pessoaDao.loginFuncionario(loginFuncionario.jtxtMatricula, loginFuncionario.jtxtSenha)){
-                eventoDao.pesquisarMatricula(loginFuncionario.jtxtMatricula);
-                modeloFuncionario.jlUsuario.setText(pessoaDao.nomeFuncionario(loginFuncionario.jtxtMatricula));
+            if (pessoaDao.loginFuncionario(loginFuncionario.jtxtMatricula, loginFuncionario.jtxtSenha)) {     
                 trocarTela(loginFuncionario, modeloFuncionario = new ModeloFuncionario());
+                Util.matricula = Integer.parseInt(loginFuncionario.jtxtMatricula.getText());
+                 modeloFuncionario.jlUsuario.setText("Bem Vindo "+pessoaDao.nomeFuncionario(loginFuncionario.jtxtMatricula));
             }
         }
 
         //Entrada
         if (e.getSource() == entrada.jParticipante) {
-            trocarTela(entrada, login = new Login() );
+            trocarTela(entrada, login = new Login());
         }
 
         if (e.getSource() == entrada.jFuncionario) {
-            trocarTela(entrada, loginFuncionario = new LoginFuncionario() );
+            trocarTela(entrada, loginFuncionario = new LoginFuncionario());
         }
 
         //Cadastro
@@ -131,10 +133,11 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
         if (e.getSource() == modeloFuncionario.jSair) {
             trocarTela(modeloFuncionario, entrada = new Entrada());
         }
-        
-        if (e.getSource() == modeloFuncionario.jSalvar){          
-            System.out.println("8452");
-            
+
+        if (e.getSource() == modeloFuncionario.jSalvar){
+            evento = new Evento(convertInt(modeloFuncionario.jtxtNumero),Util.matricula,Util.matricula,modeloFuncionario.jtxtNome.getText(),convertInt(modeloFuncionario.jtxtVagas),modeloFuncionario.jtxtDataInicio.getText(),modeloFuncionario.jtxtDataFim.getText(),modeloFuncionario.jtxtHoraInicio.getText(),modeloFuncionario.jtxtHoraFim.getText(),modeloFuncionario.jtxtInscricaoHoraInicio.getText(),modeloFuncionario.jtxtInscricaoHoraFim.getText(),modeloFuncionario.jtxtInscricaoDataInicio.getText(),modeloFuncionario.jtxtInscricaoDataFim.getText());
+            eventoDao = new EventoDao();
+            eventoDao.incluir(evento);
         }
 
     }
@@ -342,6 +345,11 @@ public class Sigea extends JFrame implements ActionListener, MouseListener, KeyL
         this.modeloFuncionario.jtxtInscricaoHoraInicio.addKeyListener(this);
         this.modeloFuncionario.jtxtInscricaoHoraFim.addKeyListener(this);
 
+    }
+    
+    public int convertInt(JTextField txt){
+        return Integer.parseInt(txt.getText());
+    
     }
 
 }

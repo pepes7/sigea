@@ -22,18 +22,18 @@ public class Login extends JPanel {
         jtxtPassword = new JPasswordField();
         
          //Definindo as configurações dos JtextFields 
-        util.jTextInit(jtxtCpf, 417,304,363, 31,"CPF", this);
-        util.jTextInit(jtxtPassword, 417,363,363, 31,"Senha", this);
+        util.jTextInit(jtxtCpf, 419,320,363, 31,"CPF", this);
+        util.jTextInit(jtxtPassword, 420,379,363, 31,"Senha", this);
 
-        jCadastro = util.jButtonInit(662, 635, 160, 23,this, null);//botao para criar uma conta
-        jOlho = util.jButtonInit(790, 370, 30, 15, this, util.olhoCorte);//botao do olho para revelar senha
-        jEntrar = util.jButtonInit(550, 470, 110, 50,this, null);       
+        jCadastro = util.jButtonInit(662, 665, 160, 23,this, null);//botao para criar uma conta
+        jOlho = util.jButtonInit(794, 387, 30, 15, this, util.olhoCorte);//botao do olho para revelar senha
+        jEntrar = util.jButtonInit(550, 500, 110, 50,this, null);       
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), null);
+        g.drawImage(img, 0, 0, img.getWidth(this), img.getHeight(this), null);
     }
 
 }

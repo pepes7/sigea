@@ -5,7 +5,6 @@ create table Pessoa(
 cpf char(11) not null,
 nome varchar(50) not null,
 email varchar(50) not null,
-senha varchar(15) not null,
 endereco varchar(50) not null, 
 primary key (cpf)); 
 
@@ -31,8 +30,9 @@ foreign key (cpfPessoa) references Pessoa(cpf),
 foreign key (codDepartamento) references Departamento(codigo));
 
 create table Candidato(
-numero smallint not null,
+numero smallint not null auto_increment,
 cpfPessoa char(11) not null,
+senha varchar(15) not null,
 primary key (numero),
 foreign key (cpfPessoa) references Pessoa(cpf));
 
@@ -77,6 +77,16 @@ foreign key (matFuncionario) references Funcionario(matricula),
 foreign key (numEvento) references Evento(numero),
 primary key(matFuncionario,numEvento));
 
+insert into pessoa values('034','Junior','gabrielpmoda','Rua 01');
+insert into departamento values('1','DAIC','Duque de Caxias');
+insert into funcionario values('2017','034','1','123456');
+
+desc evento;
+
+insert into evento values (1,1,1,'Gabriel',15,'2016-12-05','2016-12-5','05:05:05','05:05:05','05:05:05','05:05:05','2016-12-5','2016-12-5');
+truncate evento;
+
+select *from evento;
 
 
 

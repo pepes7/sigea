@@ -140,7 +140,7 @@ public class PessoaDao extends Dao{
 
     public static String nomeFuncionario(JTextField jtxtMatricula) {
         String st = "";
-        String sql = " select nome from pessoa join Funcionario on cpfPessoa = cpf and matricula = " + jtxtMatricula.getText();
+        String sql = "select nome from pessoa join Funcionario on cpfPessoa = cpf and matricula = " + jtxtMatricula.getText();
         try (PreparedStatement pst = getConnection().prepareStatement(sql)) {
             ResultSet rs = pst.executeQuery(sql);
             while (rs.next()) {

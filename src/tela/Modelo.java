@@ -18,13 +18,13 @@ public class Modelo extends JPanel{
         img = util.backgroundModelo.getImage();
         
         jlUsuario = new JLabel();
-        jlUsuario.setBounds(200, 15, 200, 22);
+        jlUsuario.setBounds(246, 29, 200, 22);
         jlUsuario.setFont(util.FONT_DEFAULT);
         jlUsuario.setForeground(Color.WHITE);
         
-        jEventos = util.jButtonInit(50, 205, 155, 50,this, null);
-        jInscricao = util.jButtonInit( 50, 350, 185, 50,this, null);
-        jSair = util.jButtonInit(1140, 13, 40, 30,this, null);    
+        jEventos = util.jButtonInit(30,105, 155, 50,this, null);
+        jInscricao = util.jButtonInit( 30, 250, 185, 50,this, null);
+        jSair = util.jButtonInit(1140, 19, 40, 30,this, null);    
                 
         add(jlUsuario);
     }

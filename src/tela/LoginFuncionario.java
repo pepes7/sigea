@@ -23,17 +23,17 @@ public class LoginFuncionario extends JPanel {
         jtxtSenha = new JPasswordField();
 
         //Definindo as configurações dos JtextFields
-        util.jTextInit(jtxtMatricula,util.JTXT_X, 345, util.JTX_TAMANHO_LARG, util.JTXT_TAMANHO_ALT,"Matricula", this);
-        util.jTextInit(jtxtSenha,util.JTXT_X, 412, util.JTX_TAMANHO_LARG, util.JTXT_TAMANHO_ALT,"Senha", this);
+        util.jTextInit(jtxtMatricula,330, 360, util.JTX_TAMANHO_LARG, util.JTXT_TAMANHO_ALT,"Matricula", this);
+        util.jTextInit(jtxtSenha,330, 430, util.JTX_TAMANHO_LARG, util.JTXT_TAMANHO_ALT,"Senha", this);
         
         //Botao para Entrar no Sistema como Funcionario
-        jEntrar = util.jButtonInit(485,510,200,45,this,null);
+        jEntrar = util.jButtonInit(485,532,200,45,this,null);
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), null);
+        g.drawImage(img, 0, 0, img.getWidth(this), img.getHeight(this), null);
     }
 
 }
